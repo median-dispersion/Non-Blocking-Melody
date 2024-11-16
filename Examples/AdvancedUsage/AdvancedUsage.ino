@@ -1,8 +1,8 @@
 /*
 
-  This is an example of how to create a short melody with predefined notes that repeats 10 times.
-  The melody can be controlled (pause, resume, stop) with 3 buttons.
-  It also prints the playback status of the melody to the serial console.
+  This is an example of how to create a short melody with predefined notes that repeats forever.
+  The melody can be controlled (pause, resume, stop) via the Serial Monitor.
+  It also prints the playback status of the melody via the Serial Monitor.
 
   Median Dispersion 2024
   https://github.com/median-dispersion/Non-Blocking-Melody
@@ -16,10 +16,7 @@
 // User configuration
 
 // Define pin assignments
-#define SPEAKER_PIN       47 
-#define PAUSE_BUTTON_PIN  10
-#define RESUME_BUTTON_PIN 11
-#define STOP_BUTTON_PIN   12
+#define SPEAKER_PIN 47
 
 //-------------------------------------------------------------------------------------------------
 // Global variables
@@ -42,9 +39,6 @@ NonBlockingMelody::Note notes[8] = {
 
 };
 
-// Length of the melody, i.e., the number of notes
-const uint16_t length = sizeof(notes) / sizeof(notes[0]);
-
 // Loop timer
 uint64_t loopTimer = 0;
 
@@ -56,17 +50,11 @@ void setup() {
   // Initialize serial communication
   Serial.begin(115200);
 
-  // Set pin modes
-  pinMode(PAUSE_BUTTON_PIN,  INPUT);
-  pinMode(RESUME_BUTTON_PIN, INPUT);
-  pinMode(STOP_BUTTON_PIN,   INPUT);
-
-  // Initialize
+  // Initialize melody object
   melody.begin();
 
-  // Play the melody with 10 repeats
-  // For infinite playback, set repeats to 0
-  melody.play(notes, length, 10);
+  // Play the melody forever by setting the repeats to 0
+  melody.play(notes, 0);
 
 }
 
@@ -75,29 +63,30 @@ void setup() {
 // ================================================================================================
 void loop() {
 
- // Update the melody in a non-blocking manner
+  // Update the melody in a non-blocking manner
   // This is required to continue the playback of the melody
-  // Keep in mind that if the update interval i.e., the time it takes to call this function is longer than the note that is being played the melody might start to lag
-  // To prevent this, keep the main program as fast as possible by avoiding delays and other blocking code
+  // Keep in mind that if the update interval i.e., the total loop time of your program is longer than the note that is being played the melody might start to lag
+  // To prevent this, keep the main loop as fast as possible by avoiding delays and other blocking code
   melody.update();
 
-  // If the pause button is pressed, pause the melody playback
-  if (digitalRead(PAUSE_BUTTON_PIN) == HIGH) {
-    melody.pause();
+  // Check if data was sent via the Serial Monitor
+  if (Serial.available()) {
+
+    // Read the data as a string
+    String command = Serial.readString();
+
+    // Remove any trailing newlines or spaces
+    command.trim();
+
+    // Check the string and either pause, resume or stop the melody
+    if (command == "pause" ) { melody.pause();  }
+    if (command == "resume") { melody.resume(); }
+    if (command == "stop"  ) { melody.stop();   }
+
   }
 
-  // If the resume button is pressed, resume the playback
-  if (digitalRead(RESUME_BUTTON_PIN) == HIGH) {
-    melody.resume();
-  }
-
-  // If the stop button is pressed, stop the melody
-  if (digitalRead(STOP_BUTTON_PIN) == HIGH) {
-    melody.stop();
-  }
-
-  // Update every second
-  if (millis() - loopTimer >= 1000) {
+  // Update every 0.25 seconds
+  if (millis() - loopTimer >= 250) {
 
     // Check playback status
     if (melody.playing()) {

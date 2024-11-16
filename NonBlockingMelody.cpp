@@ -1,3 +1,5 @@
+// https://github.com/median-dispersion/Non-Blocking-Melody
+
 #include "NonBlockingMelody.h"
 
 // ------------------------------------------------------------------------------------------------
@@ -11,10 +13,9 @@ NonBlockingMelody::NonBlockingMelody(uint8_t speakerPin):
   // Initialize members
   _speakerPin(speakerPin),
   _playing(false),
-  _notes(nullptr),
-  _length(0),
   _repeats(0),
   _note(0),
+  _forever(false),
   _timerMilliseconds(0)
 
 {}
@@ -24,7 +25,7 @@ NonBlockingMelody::NonBlockingMelody(uint8_t speakerPin):
 // ================================================================================================
 void NonBlockingMelody::begin() {
 
-  // Set pin mode of speak pin to OUTPUT
+  // Set pin mode of speaker pin to OUTPUT
   pinMode(_speakerPin, OUTPUT);
 
 }
@@ -51,14 +52,14 @@ void NonBlockingMelody::update() {
       // Then the last note has finished playing
       if (millis() - _timerMilliseconds >= _notes[previousNote].durationMilliseconds) {
         
-        // If the note has not reached the length of the melody
-        // Last note has not been played
-        if (_note < _length) {
+        // If the current note has not reached the length of the array of notes
+        // The last note has not been played -> continue
+        if (_note < _notes.size()) {
           
           // Store current time in milliseconds
           _timerMilliseconds = millis();
 
-          // If the note has a frequency, i.e., it's not a pause
+          // If the note has a frequency, i.e., it's not silent
           if (_notes[_note].frequencyHertz) {
             
             // Use tone to play on pin, with frequency, for duration
@@ -105,11 +106,10 @@ void NonBlockingMelody::update() {
 // ================================================================================================
 // Play a melody
 // ================================================================================================
-void NonBlockingMelody::play(Note *notes, uint16_t length, uint16_t repeats) {
+void NonBlockingMelody::play(std::span<Note> notes, uint16_t repeats) {
 
   _playing = true;   // Set the playback status
-  _notes   = notes;  // Set the melody
-  _length  = length; // Set the length of the melody
+  _notes   = notes;  // Set the array of notes
   _note    = 0;      // Reset to the first note
 
   // If a number of repeats was provided
@@ -156,12 +156,13 @@ void NonBlockingMelody::stop() {
   // Stop playback of current note
   noTone(_speakerPin);
 
-  _playing = false;   // Set playback status to false
-  _notes   = nullptr; // Unset the melody
-  _length  = 0;       // Reset the melody length
-  _repeats = 0;       // Reset the melody repeats
-  _note    = 0;       // Reset the current note
-  _forever = false;   // Reset the forever flag
+  _playing = false; // Set playback status to false
+  _repeats = 0;     // Reset the melody repeats
+  _note    = 0;     // Reset the current note
+  _forever = false; // Reset the forever flag
+
+  // Technically not required
+  //_notes = {}; // Unset the notes
 
 }
 

@@ -36,20 +36,17 @@ NonBlockingMelody::Note notes[8] = {
 
 };
 
-// Length of the melody, i.e., the number of notes
-const uint16_t length = sizeof(notes) / sizeof(notes[0]);
-
 // ================================================================================================
 // Setup
 // ================================================================================================
 void setup() {
 
-  // Initialize
+  // Initialize melody object
   melody.begin();
 
   // Play the melody
-  // (array of notes, number of notes, repeats: default = 1)
-  melody.play(notes, length);
+  // (array of notes, repeats: default = 1)
+  melody.play(notes);
 
 }
 
@@ -60,8 +57,8 @@ void loop() {
 
   // Update the melody in a non-blocking manner
   // This is required to continue the playback of the melody
-  // Keep in mind that if the update interval i.e., the time it takes to call this function is longer than the note that is being played the melody might start to lag
-  // To prevent this, keep the main program as fast as possible by avoiding delays and other blocking code
+  // Keep in mind that if the update interval i.e., the total loop time of your program is longer than the note that is being played the melody might start to lag
+  // To prevent this, keep the main loop as fast as possible by avoiding delays and other blocking code
   melody.update();
 
 }
