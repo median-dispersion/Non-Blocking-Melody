@@ -157,20 +157,47 @@ void NonBlockingMelody::stop() {
   noTone(_speakerPin);
 
   _playing = false; // Set playback status to false
+  _notes   = {};    // Unset the notes
   _repeats = 0;     // Reset the melody repeats
   _note    = 0;     // Reset the current note
   _forever = false; // Reset the forever flag
-
-  // Technically not required
-  //_notes = {}; // Unset the notes
 
 }
 
 // ================================================================================================
 // Returns the playback status
 // ================================================================================================
-bool NonBlockingMelody::playing() {
+bool NonBlockingMelody::playing(std::span<Note> notes) {
 
-  return _playing;
+  // Check if playback is set to true
+  if (_playing) {
+
+    // Check if no specific melody was provided
+    if (notes.empty()) {
+
+      // If no specific melody was provided and playback is set to true, something is playing
+      // Return playback status: true
+      return true;
+
+    // If a specific melody was provided
+    } else {
+
+      // Check if the provided melody is the melody that is currently playing
+      // By comparing size and content
+      if (notes.size() == _notes.size() && notes.data() == _notes.data()) {
+
+        // The melody provided is currently playing
+        // Return playback status: true
+        return true;
+
+      }
+
+    }
+
+  }
+  
+  // If none of the previous criteria were met, no playback is occurring
+  // Return playback status: false
+  return false;
 
 }

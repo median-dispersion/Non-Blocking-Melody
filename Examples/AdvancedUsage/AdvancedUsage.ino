@@ -101,6 +101,10 @@ void loop() {
 
     }
 
+    // The playback of a specific melody can be checked by using
+    // melody.playing(arrayOfNotes)
+    // Where the arrayOfNotes are the notes you would pass to the play function to initiate the melody
+
     // Update loop timer
     loopTimer = millis();
 

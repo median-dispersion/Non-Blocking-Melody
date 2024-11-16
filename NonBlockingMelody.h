@@ -29,7 +29,7 @@ class NonBlockingMelody {
     void pause();                                           // Pause the melody
     void resume();                                          // Resume the melody
     void stop();                                            // Stop the melody
-    bool playing();                                         // Returns the playback status
+    bool playing(std::span<Note> notes = {});               // Returns the playback status
 
   //-----------------------------------------------------------------------------------------------
   // Private
