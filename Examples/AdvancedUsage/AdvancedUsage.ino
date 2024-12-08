@@ -16,7 +16,7 @@
 // User configuration
 
 // Define pin assignments
-#define SPEAKER_PIN 47
+#define SPEAKER_PIN 9
 
 //-------------------------------------------------------------------------------------------------
 // Global variables

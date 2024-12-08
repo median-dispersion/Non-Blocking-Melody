@@ -13,7 +13,7 @@
 // User configuration
 
 // Define the pin the speaker is connected to
-#define SPEAKER_PIN 47 
+#define SPEAKER_PIN 9
 
 //-------------------------------------------------------------------------------------------------
 // Global variables
