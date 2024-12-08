@@ -16,7 +16,7 @@ An Arduino library for non-blocking melody playback. This library can be used fo
 
 ### Example Sketch
 
-This is a basic example illustrating a simple implementation of this library. For more detailed explanations, look at the included examples in `Examples/`.
+This is a basic example illustrating a simple implementation of this library. For more detailed explanations, look at the included examples in `examples/`.
 
 ```c++
 // Include the library & a list of note definitions
@@ -63,11 +63,11 @@ void loop() {
 
 ### Basic Usage
 
-The most basic example of this library can be found in the `Examples/BasicUsage/BasicUsage.ino` sketch file. It shows how to create a short 8 note melody and play it using the Non-Blocking Melody library.
+The most basic example of this library can be found in the `examples/BasicUsage/BasicUsage.ino` sketch file. It shows how to create a short 8 note melody and play it using the Non-Blocking Melody library.
 
 ### Advanced Usage
 
-A more complex example of this library can be found in the `Examples/AdvancedUsage/AdvancedUsage.ino` sketch file. This example demonstrates how to create a short melody with predefined notes that repeats forever. The melody can be controlled (pause, resume, stop) via the Serial Monitor. It also prints the playback status of the melody via the Serial Monitor.
+A more complex example of this library can be found in the `examples/AdvancedUsage/AdvancedUsage.ino` sketch file. This example demonstrates how to create a short melody with predefined notes that repeats forever. The melody can be controlled (pause, resume, stop) via the Serial Monitor. It also prints the playback status of the melody via the Serial Monitor.
 
 ## 🛠️ Library Functions
 
