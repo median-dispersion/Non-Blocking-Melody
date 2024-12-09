@@ -1,10 +1,10 @@
 # Non-Blocking Melody
 
-<p align="center"><img src="./Assets/Banner.svg" style="width:100%" alt="Banner"></p>
+<a href="https://github.com/median-dispersion/Non-Blocking-Melody"><img alt="Non-Blocking Melody Banner" src="./Assets/Banner.svg" style="width:100%"></a>
 
 <p>
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/median-dispersion/Non-Blocking-Melody">
-  <img alt="GitHub License" src="https://img.shields.io/github/license/median-dispersion/Non-Blocking-Melody">
+  <a href="https://github.com/median-dispersion/Non-Blocking-Melody/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/median-dispersion/Non-Blocking-Melody"></a>
+  <a href="https://github.com/median-dispersion/Non-Blocking-Melody/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/median-dispersion/Non-Blocking-Melody"></a>
 </p>
 
 An Arduino library for non-blocking melody playback. This library can be used for non-blocking melody playback, allowing concurrent tasks on a microcontroller to be executed while playing music through a buzzer or speaker. It takes an array of notes as input with a frequency in Hertz and a duration in milliseconds. It uses the built-in `Tone` functionality for PWM signal generation.
@@ -100,12 +100,12 @@ melody.pause();
 
 Resume melody playback (optional). This will only resume playback if the melody was previously paused.
 ```c++
-melody.pause();
+melody.resume();
 ```
 
 Stop melody playback (optional). This will stop the melody playback and unset the array of notes. After stopping, the melody can not be resumed.
 ```c++
-melody.pause();
+melody.stop();
 ```
 
 Check melody playback status (optional). Returns if a melody is being played. Checking if a specific melody is being played can be done by passing an array of notes to this function. (default = any melody, return = true / false)
