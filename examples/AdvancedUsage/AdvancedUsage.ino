@@ -9,6 +9,7 @@
 
 */
 
+#include "Arduino.h"
 #include "NonBlockingMelody.h"        // Include the main library
 #include "NonBlockingMelody/Notes.h"  // Include a list of notes
 

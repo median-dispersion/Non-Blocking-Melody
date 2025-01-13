@@ -1,10 +1,10 @@
 # Non-Blocking Melody
 
-<a href="https://github.com/median-dispersion/Non-Blocking-Melody"><img alt="Non-Blocking Melody Banner" src="./Assets/Banner.svg" style="width:100%"></a>
+<a href="./"><img alt="Non-Blocking Melody Banner" src="./Assets/Banner.svg" style="width:100%"></a>
 
 <p>
-  <a href="https://github.com/median-dispersion/Non-Blocking-Melody/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/median-dispersion/Non-Blocking-Melody"></a>
-  <a href="https://github.com/median-dispersion/Non-Blocking-Melody/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/median-dispersion/Non-Blocking-Melody"></a>
+  <a href="https://github.com/median-dispersion/Non-Blocking-Melody/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/median-dispersion/Non-Blocking-Melody?style=for-the-badge"></a>
+  <a href="./LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/median-dispersion/Non-Blocking-Melody?style=for-the-badge"></a>
 </p>
 
 An Arduino library for non-blocking melody playback. This library can be used for non-blocking melody playback, allowing concurrent tasks on a microcontroller to be executed while playing music through a buzzer or speaker. It takes an array of notes as input with a frequency in Hertz and a duration in milliseconds. It uses the built-in `Tone` functionality for PWM signal generation.
