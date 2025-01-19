@@ -48,8 +48,8 @@ void setup() {
   // Initialize melody object
   melody.begin();
 
-  // Play the melody forever by setting the repeats to 0
-  melody.play(notes, 0);
+  // Play the melody of length 8 forever by setting the repeats to 0
+  melody.play(notes, 8, 0);
 
 }
 
@@ -88,9 +88,9 @@ Create an array of Notes. The `Note` struct that comes with this library consist
 NonBlockingMelody::Note notes[/*length*/] = {/*{frequency, duration}*/};
 ```
 
-Play a melody. Takes in the previously defined array of notes and a number of repeats. For infinite playback, the number of repeats can be set to `0` (default number of repeats = 1).
+Play a melody. Takes in the previously defined array of notes, the length of the array and a number of repeats. For infinite playback, the number of repeats can be set to `0` (default number of repeats = 1).
 ```c++
-melody.play(notes, 2);
+melody.play(notes, length, repeats);
 ```
 
 Pause melody playback (optional).

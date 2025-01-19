@@ -13,6 +13,8 @@ NonBlockingMelody::NonBlockingMelody(uint8_t speakerPin):
   // Initialize members
   _speakerPin(speakerPin),
   _playing(false),
+  _notes(nullptr),
+  _length(0),
   _repeats(0),
   _note(0),
   _forever(false),
@@ -54,7 +56,7 @@ void NonBlockingMelody::update() {
         
         // If the current note has not reached the length of the array of notes
         // The last note has not been played -> continue
-        if (_note < _notes.size()) {
+        if (_note < _length) {
           
           // Store current time in milliseconds
           _timerMilliseconds = millis();
@@ -106,10 +108,11 @@ void NonBlockingMelody::update() {
 // ================================================================================================
 // Play a melody
 // ================================================================================================
-void NonBlockingMelody::play(std::span<Note> notes, uint16_t repeats) {
+void NonBlockingMelody::play(Note *notes, uint16_t length, uint16_t repeats) {
 
   _playing = true;   // Set the playback status
   _notes   = notes;  // Set the array of notes
+  _length  = length; // Set the length of the melody
   _note    = 0;      // Reset to the first note
 
   // If a number of repeats was provided
@@ -156,24 +159,25 @@ void NonBlockingMelody::stop() {
   // Stop playback of current note
   noTone(_speakerPin);
 
-  _playing = false; // Set playback status to false
-  _notes   = {};    // Unset the notes
-  _repeats = 0;     // Reset the melody repeats
-  _note    = 0;     // Reset the current note
-  _forever = false; // Reset the forever flag
+  _playing = false;   // Set playback status to false
+  _notes   = nullptr; // Unset the notes
+  _length  = 0;       // Reset the melody length
+  _repeats = 0;       // Reset the melody repeats
+  _note    = 0;       // Reset the current note
+  _forever = false;   // Reset the forever flag
 
 }
 
 // ================================================================================================
 // Returns the playback status
 // ================================================================================================
-bool NonBlockingMelody::playing(std::span<Note> notes) {
+bool NonBlockingMelody::playing(Note *notes) {
 
   // Check if playback is set to true
   if (_playing) {
 
     // Check if no specific melody was provided
-    if (notes.empty()) {
+    if (!notes) {
 
       // If no specific melody was provided and playback is set to true, something is playing
       // Return playback status: true
@@ -183,8 +187,7 @@ bool NonBlockingMelody::playing(std::span<Note> notes) {
     } else {
 
       // Check if the provided melody is the melody that is currently playing
-      // By comparing size and content
-      if (notes.size() == _notes.size() && notes.data() == _notes.data()) {
+      if (notes == _notes) {
 
         // The melody provided is currently playing
         // Return playback status: true

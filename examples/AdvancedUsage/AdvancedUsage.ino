@@ -4,7 +4,7 @@
   The melody can be controlled (pause, resume, stop) via the Serial Monitor.
   It also prints the playback status of the melody via the Serial Monitor.
 
-  Median Dispersion 2024
+  Median Dispersion 2025
   https://github.com/median-dispersion/Non-Blocking-Melody
 
 */
@@ -40,6 +40,9 @@ NonBlockingMelody::Note notes[8] = {
 
 };
 
+// Length of the melody, i.e., the number of notes
+const uint16_t length = sizeof(notes) / sizeof(notes[0]);
+
 // Loop timer
 uint64_t loopTimer = 0;
 
@@ -55,7 +58,7 @@ void setup() {
   melody.begin();
 
   // Play the melody forever by setting the repeats to 0
-  melody.play(notes, 0);
+  melody.play(notes, length, 0);
 
 }
 

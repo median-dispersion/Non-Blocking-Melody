@@ -2,7 +2,7 @@
 
   This is an example of how to create a short 8 note melody and play it using the Non-Blocking Melody library.
 
-  Median Dispersion 2024
+  Median Dispersion 2025
   https://github.com/median-dispersion/Non-Blocking-Melody
 
 */
@@ -37,6 +37,9 @@ NonBlockingMelody::Note notes[8] = {
 
 };
 
+// Length of the melody, i.e., the number of notes
+const uint16_t length = sizeof(notes) / sizeof(notes[0]);
+
 // ================================================================================================
 // Setup
 // ================================================================================================
@@ -46,8 +49,8 @@ void setup() {
   melody.begin();
 
   // Play the melody
-  // (array of notes, repeats: default = 1)
-  melody.play(notes);
+  // (array of notes, number of notes, repeats: default = 1)
+  melody.play(notes, length);
 
 }
 
