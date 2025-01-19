@@ -108,7 +108,7 @@ void NonBlockingMelody::update() {
 // ================================================================================================
 // Play a melody
 // ================================================================================================
-void NonBlockingMelody::play(Note *notes, uint16_t length, uint16_t repeats) {
+void NonBlockingMelody::play(const Note *notes, uint16_t length, uint16_t repeats) {
 
   _playing = true;   // Set the playback status
   _notes   = notes;  // Set the array of notes
@@ -171,7 +171,7 @@ void NonBlockingMelody::stop() {
 // ================================================================================================
 // Returns the playback status
 // ================================================================================================
-bool NonBlockingMelody::playing(Note *notes) {
+bool NonBlockingMelody::playing(const Note *notes) {
 
   // Check if playback is set to true
   if (_playing) {

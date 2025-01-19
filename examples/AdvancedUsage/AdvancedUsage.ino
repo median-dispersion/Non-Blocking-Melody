@@ -27,7 +27,7 @@ NonBlockingMelody melody(SPEAKER_PIN);
 
 // An array of notes that make up the melody with a frequency in Hertz and duration in milliseconds
 // The note frequencies are defined in "NonBlockingMelody/Notes.h"
-NonBlockingMelody::Note notes[8] = {
+const NonBlockingMelody::Note notes[8] = {
 
   {NOTE_E6,      50},
   {NOTE_SILENT,  50},

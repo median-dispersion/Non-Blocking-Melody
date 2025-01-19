@@ -24,7 +24,7 @@ NonBlockingMelody melody(SPEAKER_PIN);
 
 // An array of notes that make up the melody with a frequency in Hertz and duration in milliseconds
 // (For a pause in between notes, use a frequency of 0 Hertz)
-NonBlockingMelody::Note notes[8] = {
+const NonBlockingMelody::Note notes[8] = {
 
   {523,  65}, // 523Hz,  65ms
   {0,    65}, // 0Hz,    65ms

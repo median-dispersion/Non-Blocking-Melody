@@ -30,7 +30,7 @@ This is a basic example illustrating a simple implementation of this library. Fo
 NonBlockingMelody melody(SPEAKER_PIN);
 
 // Create an array of notes
-NonBlockingMelody::Note notes[8] = {
+const NonBlockingMelody::Note notes[8] = {
 
   {NOTE_E6,      50},
   {NOTE_SILENT,  50},
